@@ -47,7 +47,7 @@ export default function App() {
       setTimeout(() => {
         setFeedbackText("");
         setIsCorrect(null);
-      }, 4000);
+      }, 1000);
     } else if (guess > number) {
       setFeedbackText(`Wrong, too HIGH`);
       setIsCorrect(false);
@@ -55,7 +55,7 @@ export default function App() {
       setTimeout(() => {
         setFeedbackText("");
         setIsCorrect(null);
-      }, 4000);
+      }, 1000);
     }
   }, [guess]);
 
@@ -73,16 +73,23 @@ export default function App() {
     setNumber(num);
   }
 
+  function handleSetGuess() {
+    setGuess(inputText);
+    setInputText("");
+  }
+
   return (
     <View style={styles.container}>
-      {!isAnyNumGenarated && <Text style={{fontSize: "20px"}}>No number generated yet</Text>}
-      {isNewNumGenerated && <Text style={{fontSize: "20px"}}>New number generating...</Text>}
-      
+      {!isAnyNumGenarated && (
+        <Text style={{ fontSize: 20 }}>No number generated yet</Text>
+      )}
+      {isNewNumGenerated && (
+        <Text style={{ fontSize: 20 }}>New number generating...</Text>
+      )}
+
       <Pressable style={styles.button} onPress={handleGenerateNum}>
         <Text style={{ color: "white" }}>Generate new number to Guess</Text>
       </Pressable>
-
-     
 
       <View
         style={{
@@ -90,12 +97,12 @@ export default function App() {
           justifyContent: "center",
           alignItems: "center",
           marginTop: 30,
-          gap: 8
+          gap: 8,
         }}
       >
         {!isNewNumGenerated && isAnyNumGenarated && (
-        <Text style={{fontSize: "20px"}}>Guess the number!</Text>
-      )}
+          <Text>Guess the number!</Text>
+        )}
 
         <TextInput
           keyboardType="number-pad"
@@ -106,44 +113,33 @@ export default function App() {
         ></TextInput>
         <Pressable
           style={styles.button}
-          onPress={() => (setGuess(inputText), setInputText(""))}
+          onPress={handleSetGuess}
         >
           <Text style={{ color: "white" }}>Click</Text>
         </Pressable>
       </View>
 
-      <View style={{height: 200}}>
-      {!isCorrect && !(isCorrect === false) && (
+      <View style={{ height: 200 }}>
+        {!isCorrect && !(isCorrect === false) && (
           <Text
             style={{
-              fontSize: "32px",
-              
-              marginBottom: 20,
-              height: 100,
-              lineHeight: 0,
+              fontSize: 32,
               margin: 0,
-              padding: 0
-              
-            
+              padding: 0,
             }}
-          >
-           
-          </Text>
+          ></Text>
         )}
 
         {isCorrect && (
           <Text
             style={{
-              fontSize: "32px",
-              
+              fontSize: 32,
               marginBottom: 20,
               color: "green",
               height: 100,
-              lineHeight: 0,
 
               margin: 0,
-              padding: 0
-
+              padding: 0,
             }}
           >
             {feedbackText}
@@ -153,12 +149,12 @@ export default function App() {
         {isCorrect === false && (
           <Text
             style={{
-              fontSize: "32px",
+              fontSize: 32,
               color: "red",
               height: 100,
-              lineHeight: 0,
+
               margin: 0,
-              padding: 0
+              padding: 0,
             }}
           >
             {feedbackText}
@@ -187,7 +183,7 @@ const styles = StyleSheet.create({
     width: 150,
 
     borderStyle: "solid",
-    borderWidth: "1px",
+    borderWidth: 1,
     borderColor: "lightgray",
   },
   button: {
